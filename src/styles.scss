@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+*, ::before, ::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.progression_bar {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  width: 200px;
+  height: 5px;
+  background: rgba($color: #000000, $alpha: 0.05);
+  & .bar {
+    height: 100%;
+    width: 0;
+    background: rgba($color: #000000, $alpha: 0.5);
+  }
+  &::before {
+    content: attr(data-percent);
+    position: absolute;
+    color: rgba($color: #000000, $alpha: 0.25);
+    font-family: 'Spectral', serif;
+    font-weight: 300;
+    top: -100px;
+  }
+}
+
+.title {
+  font-family: 'Spectral', serif;
+  font-weight: 200;
+  font-size: 5.6rem;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  text-align: right;
+  padding: 1rem 3rem 0 0;
+  &.secondary {
+    position: fixed;
+    z-index: -1;
+    color: rgba($color: #000000, $alpha: 0.05);
+    font-style: italic;
+    width: 100%;
+  }
+}
+
+.slider {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  & .image_container {
+    display: flex;
+    justify-content: center;
+    height: clamp(100px, 70%, 600px);
+    min-width: 100vw;
+    padding: 0 clamp(1rem, 15%, 5rem);
+    & .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform .2s ease-out;
+      transform:  translate3d(0px,0px,0px) rotateY(0deg) perspective(100px);
+      &:hover {
+        transform:  perspective(100px) translate3d(0px,-1px,0px) rotateY(-1.5deg)
+      }
+      & .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+      }
+      & .description {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        font-family: 'Spectral', serif;
+        font-size: 1rem;
+        font-weight: 200;
+        line-height: 1rem;
+        color: white;
+        padding: 4px;
+        background: rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+  }
+}
